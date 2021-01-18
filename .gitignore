@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Files that GIT should ignore
 # See gitignore(5) for the format of this file
 
@@ -5,3 +6,10 @@
 /src/articles/
 *~
 #.#*
+=======
+_site
+.sass-cache
+.jekyll-cache
+.jekyll-metadata
+vendor
+>>>>>>> c97ae18 (re-inital)
