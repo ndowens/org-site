@@ -1,52 +1,977 @@
----
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-01-18 Mon 13:14 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Jekyll with org-mode and twitter bootstrap</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Seong-Kook Shin" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Jekyll with org-mode and twitter bootstrap</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org32ed587">1. Introduction</a></li>
+<li><a href="#org4b485cd">2. Document structure</a></li>
+<li><a href="#org700f78e">3. Usage</a>
+<ul>
+<li><a href="#orgc09f139">3.1. Tested Platform</a></li>
+<li><a href="#orgadf7525">3.2. Configuration</a></li>
+<li><a href="#org2b29314">3.3. Page format</a></li>
+<li><a href="#orgdad293b">3.4. Additional Plug-ins</a></li>
+<li><a href="#org2d6588a">3.5. Troubleshootings</a></li>
+</ul>
+</li>
+<li><a href="#org784fc2d">4. Implementation</a>
+<ul>
+<li><a href="#orga1159be">4.1. Table of Content(TOC) Generation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="HTML" id="orgcebd1a5">
+<p>
+&#x2014;
+layout: org
+id: jekyll-org
+title: Jekyll with org-mode and twitter bootstrap
+&#x2014;
+</p>
+
+</div>
+
+<div id="outline-container-org32ed587" class="outline-2">
+<h2 id="org32ed587"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+This document describes how to integrate your articles (in Emacs
+<a href="http://orgmode.org">org-mode</a> format) into <a href="http://jekyllrb.com/">jekyll</a> based HTML site with 
+<a href="http://twitter.github.com/bootstrap/scaffolding.html">twitter bootstrap scaffolding</a> style.
+</p>
+
+<p>
+Note that this article is heavily influenced by <a href="http://orgmode.org/worg/org-tutorials/org-jekyll.html">Using org to Blog
+with Jekyll</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4b485cd" class="outline-2">
+<h2 id="org4b485cd"><span class="section-number-2">2</span> Document structure</h2>
+<div class="outline-text-2" id="text-2">
+<div class="org-src-container">
+<pre class="src src-text">.
+&#9500;&#9472;&#9472; _plugins          # custom Jekyll/Liquid plugins
+&#9500;&#9472;&#9472; org               # Your org files should be placed here
+&#9500;&#9472;&#9472; src               # Jekyll source directory
+&#9474;   &#9500;&#9472;&#9472; _layouts
+&#9474;   &#9492;&#9472;&#9472; articles      # org generated html files are installed here
+&#9492;&#9472;&#9472; www               # Jekyll destination directory
+    &#9492;&#9472;&#9472; articles      # final destination of your .org based html files
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org700f78e" class="outline-2">
+<h2 id="org700f78e"><span class="section-number-2">3</span> Usage</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+All your <code>.org</code> files should be located in <code>org/</code> directory.
+</p>
+
+<p>
+Since, jekyll requires that all source files that 
+Your <code>.org</code> file should have following header.
+</p>
+<div class="HTML" id="org6420e7b">
+<p>
+&lt;pre&gt;#+BEGIN<sub>HTML</sub>
+&#x2014;
+layout: org
+title: Jekyll with org-mode and twitter bootstrap
+&#x2014;
+⁠#+END<sub>HTML</sub>&lt;/pre&gt;
+</p>
+
+</div>
+</div>
+
+<div id="outline-container-orgc09f139" class="outline-3">
+<h3 id="orgc09f139"><span class="section-number-3">3.1</span> Tested Platform</h3>
+<div class="outline-text-3" id="text-3-1">
+</div>
+<div id="outline-container-org23fe05a" class="outline-4">
+<h4 id="org23fe05a"><span class="section-number-4">3.1.1</span> Gentoo Linux</h4>
+<div class="outline-text-4" id="text-3-1-1">
+<ul class="org-ul">
+<li>GNU Emacs 24.2.1 (Gentoo package: app-editors/emacs-23)</li>
+
+<li>org-mode version 7.9.3d (package.el: org 20130114) or,</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org601826c" class="outline-4">
+<h4 id="org601826c"><span class="section-number-4">3.1.2</span> Mac (Darwin)</h4>
+<div class="outline-text-4" id="text-3-1-2">
+<ul class="org-ul">
+<li>GNU Emacs 24.2 (from <a href="http://emacsformacosx.com/">here</a>)</li>
+
+<li>org-mode version 7.9.1 (package.el: org 201209003)</li>
+
+<li>Gentoo Linux: GNU Emacs 23.2.1, org-mode version 7.9.3d</li>
+<li>MacOSX (darwin) 10.8.2:</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgadf7525" class="outline-3">
+<h3 id="orgadf7525"><span class="section-number-3">3.2</span> Configuration</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+You <b>MUST</b> change the value of some keys in <code>_config.yml</code>, especially
+for <code>bootstrap</code>, <code>prettify</code>, and <code>jquery</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-yaml">bootstrap: "http://some.place.com/bootstrap"
+prettify: "http://some.place.com/bootstrap"
+jquery: "http://some.place.com/bootstrap/js/jquery.js"
+</pre>
+</div>
+
+<p>
+You may need to modify both <code>src/_layouts/default.html</code> and
+<code>src/_layouts/org.html</code> to reflect the above configuration.  For example,
+<code>default.html</code> contains a HTML tags such as:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-html">&lt;<span style="color: #b6e63e;">link</span> <span style="color: #fd971f;">href</span>=<span style="color: #e2c770;">"http://some.place.com/bootstrap/css/bootstrap.css"</span> <span style="color: #fd971f;">rel</span>=<span style="color: #e2c770;">"stylesheet"</span>/&gt;
+&lt;<span style="color: #b6e63e;">link</span> <span style="color: #fd971f;">href</span>=<span style="color: #e2c770;">"http://some.place.com/bootstrap/css/bootstrap-responsive.css"</span>
+      <span style="color: #fd971f;">rel</span>=<span style="color: #e2c770;">"stylesheet"</span>/&gt;
+&lt;<span style="color: #b6e63e;">link</span> <span style="color: #fd971f;">href</span>=<span style="color: #e2c770;">"http://some.place.com/bootstrap/css/docs.css"</span> <span style="color: #fd971f;">rel</span>=<span style="color: #e2c770;">"stylesheet"</span>/&gt;
+&lt;<span style="color: #b6e63e;">link</span> <span style="color: #fd971f;">href</span>=<span style="color: #e2c770;">"http://some.place.com/prettify.css"</span> <span style="color: #fd971f;">rel</span>=<span style="color: #e2c770;">"stylesheet"</span>/&gt;
+...
+&lt;<span style="color: #b6e63e;">script</span> <span style="color: #fd971f;">src</span>=<span style="color: #e2c770;">"http://some.place.com/bootstrap/js/jquery.js"</span>&gt;&lt;/<span style="color: #b6e63e;">script</span>&gt;
+</pre>
+</div>
+
+<p>
+To use make(1) to build your html generation, the jekyll should
+not create HTTP server; make sure that you have &ldquo;<code>auto=false</code>&rdquo;.
+</p>
+
+<p>
+To use org-specific Jekyll plugins, make sure that you have
+&ldquo;<code>safe=false</code>&rdquo;.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2b29314" class="outline-3">
+<h3 id="org2b29314"><span class="section-number-3">3.3</span> Page format</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+To use custom plug-ins provided in this package, you may need to provide
+several custom variable in the YAML front matter of each page.
+</p>
+
+<p>
+To work with <code>jekyll-org</code>, it is recommended you provide following
+variables:
+</p>
+
+<ul class="org-ul">
+<li><code>id</code>: id of the page,  this will be used as the internal identification
+of the page content.   Note that if there are multiple pages written
+in several languages and their contents are the same, the <code>id</code> of these
+pages should be the same. (mandatory)</li>
+<li><code>label</code>: short name of the page, which may be used as the text of
+some hyperlinks.  If omitted, the page <code>id</code> will be used
+for <code>label</code> value. (optional)</li>
+<li><code>title</code>: title(full name) of the page, which will be used as the
+text of some hyperlinks. (mandatory)</li>
+<li><code>lead</code>: descriptive sentence to describe the purpose of the page.
+(optional)</li>
+<li><code>lang</code>: mnemonic of the page locale.  You can omit this
+variable, if the page is in the your primary language.  In this
+case, <code>jekyll-org</code> will treat the page locale to &rsquo;<code>en</code>&rsquo;
+(English).</li>
+</ul>
+
+<p>
+So, the full example of the YAML front matter will look like:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-yaml">---
 layout: default
 title: Jekyll with Org-mode
 label: Home
 id: home
-lang: 
 lead: static site generated by Jekyll, with org-mode articles
 ---
-<div class="span3 bs-docs-sidebar">
-  <ul class="nav nav-list bs-docs-sidenav">
-    <li><a href="#about"><i class="icon-chevron-right"></i>About</a></li>
-    <li><a href="#sec2"><i class="icon-chevron-right"></i>Section2</a></li>
-    <li><a href="#sec3"><i class="icon-chevron-right"></i>Section3</a></li>
-  </ul>
+</pre>
+</div>
+</div>
 </div>
 
-<div class="span9">
-  <section id="about">
-    <div class="page-header">
-      <h1>Jekyll with Org</h1>
-    </div>
-    <p>
-      All pages here are automatically generated by 
-      <a href="https://github.com/cinsk/jekyll-org/">jekyll-org</a> package.
-    </p>
 
-    <p>
-      Read <a href="{% mlink jekyll-org %}">this document</a> for the usage.
-    </p>
-  </section>
-
-
-  <section id="sec2">
-    <div class="page-header">
-      <h1>Section 2</h1>
-    </div>
-    <p>
-    </p>
-
-  </section>
-
-  <section id="sec3">
-    <div class="page-header">
-      <h1>Section 3</h1>
-    </div>
-    <p>
-      <a href="{% mlink pg1 %}">This hyperlink</a> points the article
-      depending on the locale of the current page.
-    </p>
-
-  </section>
+<div id="outline-container-orgdad293b" class="outline-3">
+<h3 id="orgdad293b"><span class="section-number-3">3.4</span> Additional Plug-ins</h3>
+<div class="outline-text-3" id="text-3-4">
 </div>
+<div id="outline-container-org35ff6a7" class="outline-4">
+<h4 id="org35ff6a7"><span class="section-number-4">3.4.1</span> &rsquo;toplink&rsquo; block</h4>
+<div class="outline-text-4" id="text-3-4-1">
+<p>
+To help generating top-level page index, <code>jekyll-org</code> provides
+<code>toplink</code> block.  <code>toplink</code> block will uses the list of page
+IDs, evaulating the contents in the block multiple times
+according to the number of elements in <code>topnav-list</code> of the
+<code>_config.yml</code> as in the following:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-yaml">topnav-list: [ "home", "article", "pg1", "pg2" ]
+</pre>
+</div>
+
+<p>
+<code>toplink</code> tag accepts five parameters separated by
+comma(&rsquo;<code>,</code>&rsquo;) character.  For example:
+</p>
+
+<div class="HTML" id="orgbecf762">
+<p>
+{% raw %}
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-html">{% toplink id, label, locale, url, self %}
+  ...
+{% endtoplink %}
+</pre>
+</div>
+<div class="HTML" id="org88026ea">
+<p>
+{% endraw %}
+</p>
+
+</div>
+
+<p>
+Each parameter name will turn to the variable name which can be
+used in the <code>toplink</code> block.  The meaning of the variables are:
+</p>
+
+<ul class="org-ul">
+<li>1st parameter (id): id of the page; this is the analogous to
+the each element in <code>topnav-list</code>.</li>
+<li>2nd parameter (label): label of the page; which can be used
+as the short name of the page.</li>
+<li>3rd parameter (locale): mnemonic of the page locale such as
+&rsquo;en&rsquo; for English, &rsquo;ko&rsquo; for Korean.  If the locale of the
+evaluating page is the same as the current page, this will be
+an empty string (<code>""</code>).</li>
+<li>4th parameter (url): URL of the page</li>
+<li>5th parameter (self): <code>true</code> if the current page is the same
+as the evaluating page.</li>
+</ul>
+
+<p>
+For example, if you want to create hyperlinks to the top-level
+pages, you can do this by:
+</p>
+
+<div class="HTML" id="org92d5897">
+<p>
+{% raw %}
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-html">&lt;<span style="color: #b6e63e;">ul</span>&gt;
+{% toplink id, label, locale, url, self %}
+  &lt;<span style="color: #b6e63e;">li</span>&gt;&lt;<span style="color: #b6e63e;">a</span> <span style="color: #fd971f;">href</span>=<span style="color: #e2c770;">"{{url}}"</span>&gt;{{label}}&lt;/<span style="color: #b6e63e;">a</span>&gt;&lt;/<span style="color: #b6e63e;">li</span>&gt;
+{% endtoplink %}
+&lt;/<span style="color: #b6e63e;">ul</span>&gt;
+</pre>
+</div>
+<div class="HTML" id="org8aaee76">
+<p>
+{% endraw %}
+</p>
+
+</div>
+
+<p>
+If you want to remove the hyperlink for the current page, among
+evaluating pages, you can check the 5th parameter as in the
+following:
+</p>
+
+<div class="HTML" id="orga8da628">
+<p>
+{% raw %}
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-html">&lt;<span style="color: #b6e63e;">ul</span>&gt;
+{% toplink id, label, locale, url, self %}
+  {% if self == true %}
+  &lt;<span style="color: #b6e63e;">li</span>&gt;{{label}}&lt;/<span style="color: #b6e63e;">li</span>&gt;
+  {% else %}
+  &lt;<span style="color: #b6e63e;">li</span>&gt;&lt;<span style="color: #b6e63e;">a</span> <span style="color: #fd971f;">href</span>=<span style="color: #e2c770;">"{{url}}"</span>&gt;{{label}}&lt;/<span style="color: #b6e63e;">a</span>&gt;&lt;/<span style="color: #b6e63e;">li</span>&gt;
+  {% endif %}
+{% endtoplink %}
+&lt;/<span style="color: #b6e63e;">ul</span>&gt;
+</pre>
+</div>
+<div class="HTML" id="org1cf9cd0">
+<p>
+{% endraw %}
+</p>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd0ae4fc" class="outline-4">
+<h4 id="orgd0ae4fc"><span class="section-number-4">3.4.2</span> &rsquo;articles&rsquo; block</h4>
+<div class="outline-text-4" id="text-3-4-2">
+<p>
+<code>articles</code> block can enumerate pages which has a specified
+layouts.
+</p>
+
+<p>
+<code>articles</code> block will be evaluated multiple times for each 
+article.  The usage is almost the same as <code>toplink</code> block.
+</p>
+
+<p>
+<code>articles</code> will accept four parameters, and each meaning of the
+parameter is:
+</p>
+
+<ul class="org-ul">
+<li>1st parameter (layouts): a name of the variable in <code>_config.yml</code>
+where its value is a list of layout names.</li>
+<li>2nd parameter (id): id of the article page</li>
+<li>3rd parameter (title): title of the article page.</li>
+<li>4th parameter (lead): short description of the article page.</li>
+<li>5th parameter (url): URL of the article page</li>
+<li>6th parameter (lang): name of the locale of the article page.
+(such as &ldquo;English&rdquo; or &ldquo;Korean&rdquo;)  If the locale of the current
+page is the same as the evaluating article page, this will be
+an empty string (<code>""</code>).</li>
+</ul>
+
+<p>
+For example, suppose that you have pages in either &ldquo;my<sub>article1</sub>&rdquo; layout
+or &ldquo;my<sub>article2</sub>&rdquo; layout.   To enumerate these pages, you need to specify
+the list of layouts in <code>_config.yml</code> like:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-yaml">article_layouts: [ "my_article1", "my_article2" ]
+</pre>
+</div>
+
+<p>
+Then, you can enumerate these pages with <code>article</code> block like:
+</p>
+
+<div class="HTML" id="orgdff0cf5">
+<p>
+{% raw %}
+</p>
+
+</div>
+<p>
+#+BEGIN<sub>SRC</sub> html
+&lt;ul&gt;
+  {% articles article<sub>layouts</sub>, id, title, lead, url, lang %}
+    {% if lang <code>= "" %}
+  &lt;li&gt;&lt;a href</code>&ldquo;{{url}}&rdquo;&gt;{{title}}&lt;/a&gt;&lt;/li&gt;
+    {% else %}
+  &lt;li&gt;&lt;a href=&ldquo;{{url}}&rdquo;&gt;{{title}}&lt;/a&gt; ({{lang}}) &lt;/li&gt;
+    {% endif %}
+  {% endarticles %}
+&lt;/ul&gt;
+#+END<sub>SRC</sub> html
+</p>
+<div class="HTML" id="org057e6f0">
+<p>
+{% endraw %}
+</p>
+
+</div>
+
+<p>
+Or, if you want to insert &rsquo;lead&rsquo; value, use the following:
+</p>
+
+<div class="HTML" id="orgb55ac5b">
+<p>
+{% raw %}
+</p>
+
+</div>
+<p>
+#+BEGIN<sub>SRC</sub> html
+&lt;ul&gt;
+  {% articles article<sub>layouts</sub>, id, title, lead, url, lang %}
+    {% if lead <code>= nil or lead =</code> &ldquo;&rdquo; %}
+      {% assign leadsep = &rsquo;&rsquo; %}
+    {% else %} 
+      {% assign leadsep = &rsquo;: &rsquo; %}
+    {% endif %}
+</p>
+
+<p>
+    {% if lang <code>= "" %}
+  &lt;li&gt;&lt;a href</code>&ldquo;{{url}}&rdquo;&gt;{{title}}&lt;/a&gt;{{leadsep}}{{lead}}&lt;/li&gt;
+    {% else %}
+  &lt;li&gt;&lt;a href=&ldquo;{{url}}&rdquo;&gt;{{title}}&lt;/a&gt; ({{lang}}){{leadsep}}{{lead}}&lt;/li&gt;
+    {% endif %}
+  {% endarticles %}
+&lt;/ul&gt;
+#+END<sub>SRC</sub> html
+</p>
+<div class="HTML" id="orga2ba3ff">
+<p>
+{% endraw %}
+</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2d6588a" class="outline-3">
+<h3 id="org2d6588a"><span class="section-number-3">3.5</span> Troubleshootings</h3>
+<div class="outline-text-3" id="text-3-5">
+</div>
+<div id="outline-container-orgd57ac92" class="outline-4">
+<h4 id="orgd57ac92"><span class="section-number-4">3.5.1</span> I got additional list bullets on Table of Contents!</h4>
+<div class="outline-text-4" id="text-3-5-1">
+<p>
+You may have some problem on the generated table of contents, which
+looks like following:
+</p>
+
+<div class="HTML" id="org584a29c">
+<p>
+&lt;div id=&ldquo;text-table-of-contents&rdquo;&gt;
+&lt;ul&gt;
+&lt;li&gt;1 Introduction&lt;/li&gt;
+&lt;li&gt;2 Document structure&lt;/li&gt;
+&lt;li&gt;3 Usage
+&lt;ul&gt;
+&lt;li&gt;
+&lt;ul&gt;
+&lt;li&gt;3.1 Troubleshootings&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;4 Implementation
+&lt;ul&gt;
+&lt;li&gt;
+&lt;ul&gt;
+&lt;li&gt;4.1 Table of Content(TOC) Generation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</p>
+
+</div>
+
+<p>
+The problem is that, your Emacs scripts set
+<code>org-odd-levels-only</code> to <code>t</code>, but the batch script, <code>publish.el</code>
+in the package, does not aware of it.  To work around this, 
+add &ldquo;<code>odd</code>&rdquo; in the <code>STARTUP</code> keyword.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span style="color: #909090;">#+STARTUP: odd</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org98c5e35" class="outline-4">
+<h4 id="org98c5e35"><span class="section-number-4">3.5.2</span> I got an error, Symbol&rsquo;s function definition is void: org-version</h4>
+<div class="outline-text-4" id="text-3-5-2">
+<p>
+Your Emacs uses out-dated org-version probably 6.x.  Install
+recent org-mode.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org784fc2d" class="outline-2">
+<h2 id="org784fc2d"><span class="section-number-2">4</span> Implementation</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-orga1159be" class="outline-3">
+<h3 id="orga1159be"><span class="section-number-3">4.1</span> Table of Content(TOC) Generation</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+At first, to convert org files into twitter&rsquo;s <i>scaffolding</i> style, 
+I need a way to generate first-level headings into <i>scaffolding</i> way.
+</p>
+
+<p>
+However, to parse org file directly to gereate <i>scaffolding</i> TOC
+is somewhat difficult to implement; I briefly overlooked
+<code>org-html.el</code> in org-mode, which is fairly complicated.
+</p>
+
+<p>
+Since this is just my hobby to publish my own site, I decieded to
+make a Jekyll/Liquid plugin, that parses the HTML (which org-mode
+exported) to get the first-level headings, and use Liquid markup
+to generate <i>scaffolding</i> TOC.
+</p>
+
+<p>
+Thankfully, org-mode HTML output is fairly simple.  Here are an
+example of HTML that org-mode generated:
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-html">&lt;<span style="color: #b6e63e;">div</span> <span style="color: #fd971f;">id</span>=<span style="color: #e2c770;">"table-of-contents"</span>&gt;
+&lt;<span style="color: #b6e63e;">h2</span>&gt;<span style="font-weight: bold; font-style: italic; text-decoration: underline;">Table of Contents</span>&lt;/<span style="color: #b6e63e;">h2</span>&gt;
+&lt;<span style="color: #b6e63e;">div</span> <span style="color: #fd971f;">id</span>=<span style="color: #e2c770;">"text-table-of-contents"</span>&gt;
+&lt;<span style="color: #b6e63e;">ul</span>&gt;
+&lt;<span style="color: #b6e63e;">li</span>&gt;&lt;<span style="color: #b6e63e;">a</span> <span style="color: #fd971f;">href</span>=<span style="color: #e2c770;">"#sec-1"</span>&gt;1 Introduction&lt;/<span style="color: #b6e63e;">a</span>&gt;
+&lt;<span style="color: #b6e63e;">ul</span>&gt;
+&lt;<span style="color: #b6e63e;">li</span>&gt;&lt;<span style="color: #b6e63e;">a</span> <span style="color: #fd971f;">href</span>=<span style="color: #e2c770;">"#sec-1-1"</span>&gt;1.1 Conventions in this article&lt;/<span style="color: #b6e63e;">a</span>&gt;&lt;/<span style="color: #b6e63e;">li</span>&gt;
+&lt;<span style="color: #b6e63e;">li</span>&gt;&lt;<span style="color: #b6e63e;">a</span> <span style="color: #fd971f;">href</span>=<span style="color: #e2c770;">"#id-core"</span>&gt;1.2 ID management&lt;/<span style="color: #b6e63e;">a</span>&gt;&lt;/<span style="color: #b6e63e;">li</span>&gt;
+&lt;/<span style="color: #b6e63e;">ul</span>&gt;
+&lt;/<span style="color: #b6e63e;">li</span>&gt;
+&lt;<span style="color: #b6e63e;">li</span>&gt;&lt;<span style="color: #b6e63e;">a</span> <span style="color: #fd971f;">href</span>=<span style="color: #e2c770;">"#sec-2"</span>&gt;2 Service Components Layout&lt;/<span style="color: #b6e63e;">a</span>&gt;
+&lt;<span style="color: #b6e63e;">ul</span>&gt;
+&lt;<span style="color: #b6e63e;">li</span>&gt;&lt;<span style="color: #b6e63e;">a</span> <span style="color: #fd971f;">href</span>=<span style="color: #e2c770;">"#sec-2-1"</span>&gt;2.1 Permanent Cluster&lt;/<span style="color: #b6e63e;">a</span>&gt;&lt;/<span style="color: #b6e63e;">li</span>&gt;
+&lt;<span style="color: #b6e63e;">li</span>&gt;&lt;<span style="color: #b6e63e;">a</span> <span style="color: #fd971f;">href</span>=<span style="color: #e2c770;">"#sec-2-2"</span>&gt;2.2 Caching Cluster&lt;/<span style="color: #b6e63e;">a</span>&gt;&lt;/<span style="color: #b6e63e;">li</span>&gt;
+&lt;/<span style="color: #b6e63e;">ul</span>&gt;
+&lt;/<span style="color: #b6e63e;">ul</span>&gt;
+&lt;/<span style="color: #b6e63e;">div</span>&gt;
+&lt;/<span style="color: #b6e63e;">div</span>&gt;
+</pre>
+</div>
+
+<p>
+As you can see, all hyperlink IDs are in the form of <code>sec-N-M</code>, so
+it can be easily extracted with the following regular expression:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ruby">    <span style="color: #e2c770;">/^ *&lt;li&gt; *&lt;a +href *= *"(#sec-[0-9]+)" *&gt;(.*?)&lt;\/a&gt;/</span>
+</pre>
+</div>
+
+<p>
+So, I made a <i>Jekyll</i> plugin, which parses the org-generated HTML file,
+and put the metadata of the each top-level headings in the <i>Jekyll</i> context,
+so that the <i>Jekyll</i> layout pages can take benefits from the context:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ruby"><span style="color: #fb2874;">module</span> <span style="color: #66d9ef;">Jekyll</span>
+  <span style="color: #fb2874;">class</span> <span style="color: #66d9ef;">OrgToc</span> &lt; <span style="color: #66d9ef;">Liquid</span>::<span style="color: #66d9ef;">Block</span>
+    ...
+    <span style="color: #fb2874;">def</span> <span style="color: #b6e63e;">render</span>(context)
+      contents = context[<span style="color: #e2c770;">'page'</span>][<span style="color: #e2c770;">'content'</span>]
+
+      thetoc = []
+
+      contents.each_line { |line|
+        m = <span style="color: #e2c770;">/^ *&lt;li&gt; *&lt;a +href *= *"(#sec-[0-9]+)" *&gt;(.*?)&lt;\/a&gt;/</span>.match line
+        <span style="color: #fb2874;">if</span> m
+          thetoc.push( { <span style="color: #e2c770;">"id"</span> =&gt; m[<span style="color: #9c91e4; font-weight: bold;">1</span>], <span style="color: #e2c770;">"title"</span> =&gt; m[<span style="color: #9c91e4; font-weight: bold;">2</span>] })
+        <span style="color: #fb2874;">end</span>
+
+        <span style="color: #fb2874;">break</span> <span style="color: #fb2874;">if</span> <span style="color: #e2c770;">/ *&lt;div +id *= *"outline-container-[0-9]+\"/</span>.match line
+      }
+
+      context[<span style="color: #e2c770;">'page'</span>][<span style="color: #e2c770;">'orgtoc'</span>] = thetoc
+
+      <span style="color: #fb2874;">super</span>
+    <span style="color: #fb2874;">end</span>
+    ...
+  <span style="color: #fb2874;">end</span>
+<span style="color: #fb2874;">end</span>
+
+<span style="color: #66d9ef;">Liquid</span>::<span style="color: #66d9ef;">Template</span>.register_tag(<span style="color: #e2c770;">'orgtoc'</span>, <span style="color: #66d9ef;">Jekyll</span>::<span style="color: #66d9ef;">OrgToc</span>)
+</pre>
+</div>
+
+<p>
+Then, the <i>Jekyll</i> layout for org HTML files will uses <code>page.orgtoc</code> to
+generate <i>scaffolding</i> TOC:
+</p>
+
+<div class="HTML" id="org6b67614">
+<p>
+{% raw %}
+</p>
+
+</div>
+
+<div class="org-src-container">
+<pre class="src src-html">&lt;<span style="color: #b6e63e;">div</span> <span style="color: #fd971f;">class</span>=<span style="color: #e2c770;">"span3 bs-doc-sidebar"</span>&gt;
+  &lt;<span style="color: #b6e63e;">ul</span> <span style="color: #fd971f;">class</span>=<span style="color: #e2c770;">"nav nav-list bs-docs-sidenav"</span>&gt;
+  {% orgtoc %}
+    {% for item in page.orgtoc %}
+      &lt;<span style="color: #b6e63e;">li</span>&gt;&lt;<span style="color: #b6e63e;">a</span> <span style="color: #fd971f;">href</span>=<span style="color: #e2c770;">"{{item.id}}"</span>&gt;&lt;<span style="color: #b6e63e;">i</span> <span style="color: #fd971f;">class</span>=<span style="color: #e2c770;">"icon-chevron-right"</span>&gt;&lt;/<span style="color: #b6e63e;">i</span>&gt;
+      {{ item.title }}&lt;/<span style="color: #b6e63e;">a</span>&gt;&lt;/<span style="color: #b6e63e;">li</span>&gt;
+    {% endfor %}
+  {% endorgtoc %}
+  &lt;/<span style="color: #b6e63e;">ul</span>&gt;
+&lt;/<span style="color: #b6e63e;">div</span>&gt;
+</pre>
+</div>
+
+<div class="HTML" id="org56d6e71">
+<p>
+{% endraw %}
+</p>
+
+</div>
+</div>
+
+<div id="outline-container-orgda52913" class="outline-4">
+<h4 id="orgda52913"><span class="section-number-4">4.1.1</span> Known Issues</h4>
+<div class="outline-text-4" id="text-4-1-1">
+<p>
+However, there are some problems with this approach.
+</p>
+
+<p>
+In <i>scaffolding</i> page, one of the left-side navigation item is
+highlighted, depending on the current location of the contents.
+</p>
+
+<p>
+I cannot make this happen on org-generated page, since the
+contents generation is handled by <i>org-mode</i>, which I cannot
+control manually.
+</p>
+
+<p>
+In detail, the <i>scaffolding</i> has following structures:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-html"><span style="color: #6b6b6b;">&lt;!-- </span><span style="color: #6b6b6b;">This is the left-side navigation list </span><span style="color: #6b6b6b;">--&gt;</span>
+&lt;<span style="color: #b6e63e;">div</span> <span style="color: #fd971f;">class</span>=<span style="color: #e2c770;">"span3 bs-docs-sidebar"</span>&gt;
+  &lt;<span style="color: #b6e63e;">ul</span> <span style="color: #fd971f;">class</span>=<span style="color: #e2c770;">"nav nav-list bs-docs-sidenav"</span>&gt;
+    &lt;<span style="color: #b6e63e;">li</span>&gt;&lt;<span style="color: #b6e63e;">a</span> <span style="color: #fd971f;">href</span>=<span style="color: #e2c770;">"#sec-1"</span>&gt;&lt;<span style="color: #b6e63e;">i</span> <span style="color: #fd971f;">class</span>=<span style="color: #e2c770;">"icon-chevron-right"</span>&gt;&lt;/<span style="color: #b6e63e;">i</span>&gt;Section 1&lt;/<span style="color: #b6e63e;">a</span>&gt;&lt;/<span style="color: #b6e63e;">li</span>&gt;
+    &lt;<span style="color: #b6e63e;">li</span>&gt;&lt;<span style="color: #b6e63e;">a</span> <span style="color: #fd971f;">href</span>=<span style="color: #e2c770;">"#sec-2"</span>&gt;&lt;<span style="color: #b6e63e;">i</span> <span style="color: #fd971f;">class</span>=<span style="color: #e2c770;">"icon-chevron-right"</span>&gt;&lt;/<span style="color: #b6e63e;">i</span>&gt;Section 2&lt;/<span style="color: #b6e63e;">a</span>&gt;&lt;/<span style="color: #b6e63e;">li</span>&gt;
+    &lt;<span style="color: #b6e63e;">li</span>&gt;&lt;<span style="color: #b6e63e;">a</span> <span style="color: #fd971f;">href</span>=<span style="color: #e2c770;">"#sec-3"</span>&gt;&lt;<span style="color: #b6e63e;">i</span> <span style="color: #fd971f;">class</span>=<span style="color: #e2c770;">"icon-chevron-right"</span>&gt;&lt;/<span style="color: #b6e63e;">i</span>&gt;Section 3&lt;/<span style="color: #b6e63e;">a</span>&gt;&lt;/<span style="color: #b6e63e;">li</span>&gt;
+    ...
+  &lt;/<span style="color: #b6e63e;">ul</span>&gt;
+&lt;/<span style="color: #b6e63e;">div</span>&gt;
+
+<span style="color: #6b6b6b;">&lt;!-- </span><span style="color: #6b6b6b;">This is the right-side, contents </span><span style="color: #6b6b6b;">--&gt;</span>
+&lt;<span style="color: #b6e63e;">div</span> <span style="color: #fd971f;">class</span>=<span style="color: #e2c770;">"span9"</span>&gt;
+  &lt;<span style="color: #b6e63e;">section</span> <span style="color: #fd971f;">id</span>=<span style="color: #e2c770;">"sec-1"</span>&gt;
+    &lt;<span style="color: #b6e63e;">div</span> <span style="color: #fd971f;">class</span>=<span style="color: #e2c770;">"page-header"</span>&gt;
+      &lt;<span style="color: #b6e63e;">h1</span>&gt;<span style="font-weight: bold; text-decoration: underline;">Section 1</span>&lt;/<span style="color: #b6e63e;">h1</span>&gt;
+    &lt;/<span style="color: #b6e63e;">div</span>&gt;
+    &lt;<span style="color: #b6e63e;">p</span>&gt;...&lt;/<span style="color: #b6e63e;">p</span>&gt;
+  &lt;/<span style="color: #b6e63e;">section</span>&gt;
+
+  &lt;<span style="color: #b6e63e;">section</span> <span style="color: #fd971f;">id</span>=<span style="color: #e2c770;">"sec-2"</span>&gt;
+    &lt;<span style="color: #b6e63e;">div</span> <span style="color: #fd971f;">class</span>=<span style="color: #e2c770;">"page-header"</span>&gt;
+      &lt;<span style="color: #b6e63e;">h1</span>&gt;<span style="font-weight: bold; text-decoration: underline;">Section 2</span>&lt;/<span style="color: #b6e63e;">h1</span>&gt;
+    &lt;/<span style="color: #b6e63e;">div</span>&gt;
+    &lt;<span style="color: #b6e63e;">p</span>&gt;...&lt;/<span style="color: #b6e63e;">p</span>&gt;
+  &lt;/<span style="color: #b6e63e;">section</span>&gt;
+
+  ...
+&lt;/<span style="color: #b6e63e;">div</span>&gt;
+</pre>
+</div>
+
+<p>
+Following is the structure that I implemented:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-html"><span style="color: #6b6b6b;">&lt;!-- </span><span style="color: #6b6b6b;">This is the left-side navigation list </span><span style="color: #6b6b6b;">--&gt;</span>
+&lt;<span style="color: #b6e63e;">div</span> <span style="color: #fd971f;">class</span>=<span style="color: #e2c770;">"span3 bs-docs-sidebar"</span>&gt;
+  &lt;<span style="color: #b6e63e;">ul</span> <span style="color: #fd971f;">class</span>=<span style="color: #e2c770;">"nav nav-list bs-docs-sidenav"</span>&gt;
+    &lt;<span style="color: #b6e63e;">li</span>&gt;&lt;<span style="color: #b6e63e;">a</span> <span style="color: #fd971f;">href</span>=<span style="color: #e2c770;">"#sec-1"</span>&gt;&lt;<span style="color: #b6e63e;">i</span> <span style="color: #fd971f;">class</span>=<span style="color: #e2c770;">"icon-chevron-right"</span>&gt;&lt;/<span style="color: #b6e63e;">i</span>&gt;Section 1&lt;/<span style="color: #b6e63e;">a</span>&gt;&lt;/<span style="color: #b6e63e;">li</span>&gt;
+    &lt;<span style="color: #b6e63e;">li</span>&gt;&lt;<span style="color: #b6e63e;">a</span> <span style="color: #fd971f;">href</span>=<span style="color: #e2c770;">"#sec-2"</span>&gt;&lt;<span style="color: #b6e63e;">i</span> <span style="color: #fd971f;">class</span>=<span style="color: #e2c770;">"icon-chevron-right"</span>&gt;&lt;/<span style="color: #b6e63e;">i</span>&gt;Section 2&lt;/<span style="color: #b6e63e;">a</span>&gt;&lt;/<span style="color: #b6e63e;">li</span>&gt;
+    &lt;<span style="color: #b6e63e;">li</span>&gt;&lt;<span style="color: #b6e63e;">a</span> <span style="color: #fd971f;">href</span>=<span style="color: #e2c770;">"#sec-3"</span>&gt;&lt;<span style="color: #b6e63e;">i</span> <span style="color: #fd971f;">class</span>=<span style="color: #e2c770;">"icon-chevron-right"</span>&gt;&lt;/<span style="color: #b6e63e;">i</span>&gt;Section 3&lt;/<span style="color: #b6e63e;">a</span>&gt;&lt;/<span style="color: #b6e63e;">li</span>&gt;
+    ...
+  &lt;/<span style="color: #b6e63e;">ul</span>&gt;
+&lt;/<span style="color: #b6e63e;">div</span>&gt;
+
+<span style="color: #6b6b6b;">&lt;!-- </span><span style="color: #6b6b6b;">This is the right-side, contents </span><span style="color: #6b6b6b;">--&gt;</span>
+&lt;<span style="color: #b6e63e;">div</span> <span style="color: #fd971f;">class</span>=<span style="color: #e2c770;">"span9"</span>&gt;
+  <span style="color: #6b6b6b;">&lt;!-- </span><span style="color: #6b6b6b;">from now on, this is org-mode generated contents </span><span style="color: #6b6b6b;">--&gt;</span>
+  &lt;<span style="color: #b6e63e;">div</span> <span style="color: #fd971f;">id</span>=<span style="color: #e2c770;">"outline-container-1"</span> <span style="color: #fd971f;">class</span>=<span style="color: #e2c770;">"outline-2"</span>&gt;
+    &lt;<span style="color: #b6e63e;">h2</span> <span style="color: #fd971f;">id</span>=<span style="color: #e2c770;">"sec-1"</span>&gt;<span style="font-weight: bold; font-style: italic; text-decoration: underline;">Section 1</span>&lt;/<span style="color: #b6e63e;">h2</span>&gt;
+    ...
+  &lt;/<span style="color: #b6e63e;">div</span>&gt;
+
+  &lt;<span style="color: #b6e63e;">div</span> <span style="color: #fd971f;">id</span>=<span style="color: #e2c770;">"outline-container-2"</span> <span style="color: #fd971f;">class</span>=<span style="color: #e2c770;">"outline-2"</span>&gt;
+    &lt;<span style="color: #b6e63e;">h2</span> <span style="color: #fd971f;">id</span>=<span style="color: #e2c770;">"sec-1"</span>&gt;<span style="font-weight: bold; font-style: italic; text-decoration: underline;">Section 2</span>&lt;/<span style="color: #b6e63e;">h2</span>&gt;
+    ...
+  &lt;/<span style="color: #b6e63e;">div</span>&gt;
+  ...
+&lt;/<span style="color: #b6e63e;">div</span>&gt;
+</pre>
+</div>
+
+<ol class="org-ol">
+<li>Since the body content itself is generated by <i>org-mode</i>, I
+cannot make the highlighting feature of the navigation bar
+(in the left side of the page).</li>
+
+<li></li>
+</ol>
+<p>
+<a href="https://github.com/cinsk/jekyll-org/">jekyll-org</a> 
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Seong-Kook Shin</p>
+<p class="date">Created: 2021-01-18 Mon 13:14</p>
+</div>
+</body>
+</html>
