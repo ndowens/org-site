@@ -9,15 +9,13 @@ server: false
 #bootstrap: "http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2"
 #prettify: "http://cdnjs.cloudflare.com/ajax/libs/prettify/r224"
 
-bootstrap: "http://some.place.com/bootstrap"
-prettify: "http://some.place.com/bootstrap"
-jquery: "http://some.place.com/js/jquery.js"
+bootstrap: "https://ndowens.github.io/org-site/themes/lanyon"
 
 # 'label' is the short label of the index.html where it appears in the
 # top-right corner of all pages
 label: "Jekyll-Org"
 
-topnav-list: [ "home", "article", "pg1", "pg2" ]
+topnav-list: [ "home", "article" ]
 
 source: "src"
 destination: "www"
@@ -36,5 +34,3 @@ orgdestination: "articles"
 linguas:
 - :label: English
   :tag: en
-- :label: Korean
-  :tag:  ko
